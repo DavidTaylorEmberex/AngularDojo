@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Emberex AngularJS Dojo</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
+		<script src="app/dojo.js"></script>
+		<script src="app/services/service.js"></script>
+		<script src="app/controllers/controller.js"></script>
+	</head>
+	<body>
+		<h1>Emberex AngularJS Dojo</h1>
+		<div ng-app="dojo">
+			<div ng-controller="Controller">
+				<h2>{{greeting}}</h2>
+				<input type="button" ng-click="doThings()" value="Click me!">
+				<input type="text" ng-model="username" placeholder="Enter yo' name, foo'!">
+				<div>
+					<input type="radio" value="one" name="radio" id="radio1" ng-model="radioModel">
+					<label for="radio1">One</label>
+					<input type="radio" value="two" name="radio" id="radio2" ng-model="radioModel">
+					<label for="radio2">Two</label>
+					<input type="radio" value="three" name="radio" id="radio3" ng-model="radioModel">
+					<label for="radio3">Three</label>
+				</div>
+				<h3>Selected <span style="color:red">{{radioModel}}</span></h3>
+			</div>
+		</div>
+	</body>
+</html>

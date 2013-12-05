@@ -1,0 +1,28 @@
+{
+  "name": "AngularDojo",
+  "version": "0.0.0",
+  "description": "Emberex Angular Dojo",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt-init": "~0.2.1",
+    "grunt": "~0.4.2"
+  },
+  "devDependencies": {
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-uglify": "~0.2.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DavidTaylorEmberex/AngularDojo.git"
+  },
+  "author": "David",
+  "license": "None",
+  "bugs": {
+    "url": "https://github.com/DavidTaylorEmberex/AngularDojo/issues"
+  }
+}
