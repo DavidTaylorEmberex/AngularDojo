@@ -1,15 +1,46 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>dojo</title>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
 		<script type="text/javascript" src="app.js"></script>
+		<style>
+			input.error {
+				border: 2px solid red;
+			}
+			div.error {
+				background-color: red;
+			}
+			input.ng-valid {
+				border: 2px solid green;
+			}
+		</style>
 	</head>
 	<body>
 		<div ng-app="dojoApp">
 			<div ng-controller="dojoController">
-				<input type="text" ng-model="name"/>{{name}}
-				<input type="button" ng-click="validateName()" value="validate"/>
-				<input type="button" ng-click="saveStuff(name)" value="Save"/>
+				<form novalidate name="userform" ng-submit="submitForm()">
+					<label>Name:</label>
+					<input type="text" ng-model="user.name" id="name" required
+						ng-minlength=3 not-michael="user.name" name="name"
+						ng-class="{error: userform.name.$dirty && userform.name.$invalid}"><br/>
+					<label>Email:</label>
+					<input type="email" ng-model="user.email" id="name" required name="email"
+						ng-class="{error: userform.email.$dirty && userform.email.$invalid}"><br/>
+					<div ng-class="{error: userform.gender.$invalid}">
+						<label>Gender:</label>
+						<input type="radio" ng-model="user.gender" id="female" required name="gender" value="female">
+						<label for="female">Female</label>
+						<input type="radio" ng-model="user.gender" id="male" required name="gender" value="male">
+						<label for="male">Male</label><br/>
+					</div>
+					<input type="submit">
+				</form>
+				{{user}}<br/>
+				Added users:
+				<ul>
+					<dojo-list-item ng-repeat="person in getPeople()" />
+				</ul>
 			</div>
 		</div>
 	</body>
