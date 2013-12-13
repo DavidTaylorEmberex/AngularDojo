@@ -22,7 +22,7 @@
 				<form novalidate name="userform" ng-submit="submitForm()">
 					<label>Name:</label>
 					<input type="text" ng-model="user.name" id="name" required
-						ng-minlength=3 not-michael="user.name" name="name"
+						ng-minlength=3 name="name"
 						ng-class="{error: userform.name.$dirty && userform.name.$invalid}"><br/>
 					<label>Email:</label>
 					<input type="email" ng-model="user.email" id="name" required name="email"
@@ -39,8 +39,18 @@
 				{{user}}<br/>
 				Added users:
 				<ul>
-					<dojo-list-item ng-repeat="person in getPeople()" />
+					<dojo-list-item ng-repeat="person in getPeople() | filter: {name: 'bbbb'} " />
 				</ul>
+				
+				<test-me>Not ME Element</test-me>
+				
+				<div test-me>Not Me too! attr</div>
+				
+				<!-- test-me -->
+				
+				<div class='test-me'>class based</div>
+				
+				<div test-me="thing">another attr</div>
 			</div>
 		</div>
 	</body>

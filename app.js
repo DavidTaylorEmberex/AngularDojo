@@ -6,12 +6,14 @@ foo.controller("dojoController", function($scope, SaveService) {
 			SaveService.saveUser($scope.user);
 			$scope.user = {};
 			$scope.userform.$setPristine();
+			$scope.people = getPeople();
 		} else {
 			alert("Fix your invalid input, dude.");
 		}
 	};
 
-	$scope.getPeople = function() {
+	getPeople = function() {
+		console.log("getting people");
 		return SaveService.getAllUsers();
 	};
 });
@@ -31,12 +33,20 @@ foo.factory('SaveService', function() {
 	};
 });
 
+foo.directive("testMe", function() {
+	return {
+		restrict: 'CMEA',
+		replace: true,
+		template: "<b>MEEEEEEE!<b>"
+	}
+});
+
 foo.directive("notMichael", function() {
 	return {
 		require: "ngModel",
 		link: function(scope, element, attrs, controller) {
 			scope.$watch(attrs.ngModel, function() {
-				if (scope.user && scope.user.name && scope.user.name.match(/[Mm]i(ke|chael)/)) {
+				if (scope.user && scope.user.name && scope.user.name.match(attrs.notMe)) {
 					controller.$setValidity('notMichael', false);
 				} else {
 					controller.$setValidity('notMichael', true);
@@ -50,8 +60,6 @@ foo.directive("dojoListItem", function() {
 	return {
 		restrict: 'E',
 		replace: true,
-		template: "<li>{{person}}</li>",
-		link: function(scope, element) {
-		}
+		template: "<li><pre>{{person}}</pre></li>"
 	};
 });
