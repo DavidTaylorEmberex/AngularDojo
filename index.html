@@ -21,36 +21,16 @@
 			<div ng-controller="dojoController">
 				<form novalidate name="userform" ng-submit="submitForm()">
 					<label>Name:</label>
-					<input type="text" ng-model="user.name" id="name" required
-						ng-minlength=3 name="name"
-						ng-class="{error: userform.name.$dirty && userform.name.$invalid}"><br/>
+					<input type="text" ng-model="user.name" id="name" name="name" required><br/>
 					<label>Email:</label>
-					<input type="email" ng-model="user.email" id="name" required name="email"
-						ng-class="{error: userform.email.$dirty && userform.email.$invalid}"><br/>
-					<div ng-class="{error: userform.gender.$invalid}">
-						<label>Gender:</label>
-						<input type="radio" ng-model="user.gender" id="female" required name="gender" value="female">
-						<label for="female">Female</label>
-						<input type="radio" ng-model="user.gender" id="male" required name="gender" value="male">
-						<label for="male">Male</label><br/>
-					</div>
-					<input type="submit">
+					<input type="text" ng-model="user.email" id="email" required name="email"><br/>
+                    <label>Gender:</label>
+                    <gender-options model="user.gender"></gender-options></br>
+					<input type="submit"></br>
+                    <input type="button" ng-click="killPeople()" value="Clear"/>
 				</form>
-				{{user}}<br/>
-				Added users:
-				<ul>
-					<dojo-list-item ng-repeat="person in getPeople() | filter: {name: 'bbbb'} " />
-				</ul>
-				
-				<test-me>Not ME Element</test-me>
-				
-				<div test-me>Not Me too! attr</div>
-				
-				<!-- test-me -->
-				
-				<div class='test-me'>class based</div>
-				
-				<div test-me="thing">another attr</div>
+                <span>People:</span>
+                <pre>{{people | json}}</pre>
 			</div>
 		</div>
 	</body>
