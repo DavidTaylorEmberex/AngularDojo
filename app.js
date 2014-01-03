@@ -31,6 +31,10 @@ foo.controller("dojoController", function($scope, SaveService) {
         return SaveService.getAllUsers();
     }
     
+    $scope.blahFunc = function() {
+        alert("blah func");
+    };
+    
     reset();
 });
 
@@ -53,35 +57,39 @@ foo.factory('SaveService', function() {
 });
 
 foo.directive("genderOptions", ["$compile", function($compile) {
-    var genders = ["Male", "Female"];
     return {
-        restrict: "E",
+        restrict: "AE",
         templateUrl: "template.html",
-        replace: true,
-        controller: "dojoController",
+        replace: false,
+        priority: 7,
+        scope: {
+            myModel: "@myOtherThing",
+            func: "=myTestFunc"
+        },
         compile: function(element, attributes) {
-            var optionString = '<div ng-repeat="gender in foo"><input type="radio" id="{{gender}}" value="{{gender}}" name="gender" ng-model="user.gender"/><label for="{{gender}}">{{gender}}</label><br/></div>';
+            /*var optionString = '<div ng-repeat="gender in foo"><input type="radio" id="{{gender}}" value="{{gender}}" name="gender" ng-model="user.gender"/><label for="{{gender}}">{{gender}}</label><br/></div>';
             var radioOption = angular.element(optionString);
-            element.prepend(radioOption);
+            element.prepend(radioOption);*/
             
             return {
                 pre: function(scopePre, elementPre, attrsPre) {
-                    scopePre.foo = genders;
-                    scopePre.$watch(function() {
-                        return scopePre.user.name;
-                    }, function() {
-                        scopePre.name = scopePre.user.name;
-                    });
-                    genders.push("Other");
+                   // scopePre.genders = ["Male", "Female"];
+                    //scopePre.$watch("user.name", function() {
+                 //       scopePre.name = scopePre.user.name;
+                 //   });
+                   // scopePre.genders.push("Other");
                 },
                 
                 post: function(scopePost, elementPost, attrsPost) {
-                    scopePost.$watch(function() {
-                        return scopePost.user.gender;
-                    }, function() {
+                   // scopePost.foo = scopePost.genders;
+                    scopePost.$$eventListeners["user.gender"] = [];
+                    var deregister = scopePost.$watch("user.gender", function() {
                         scopePost.gender = scopePost.user.gender;
                     });
-                    genders.push("Undisclosed");
+                    //genders = scopePost.myModel;
+                    //genders.push("Undisclosed");
+                    console.log(attrsPost);
+                    alert(attrsPost.mymodel);
                 }
             };
         }

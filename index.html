@@ -14,7 +14,10 @@
 					<label>Email:</label>
 					<input type="text" ng-model="user.email" id="email" required name="email"><br/>
                     <label>Gender:</label>
-                    <gender-options model="user.gender"></gender-options></br>
+                    <div someAttr="console.log('haha');" my-test-func="blahFunc" gender-options my-other-thing="alex" model="user.gender">
+                        
+                    </div>
+                    <br/>
 					<input type="submit"></br>
                     <input type="button" ng-click="killPeople()" value="Clear"/>
 				</form>
